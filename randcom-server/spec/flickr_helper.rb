@@ -1,8 +1,12 @@
 require 'fakeweb'
 
-FakeWeb.allow_net_connect = false
+base = 'http://api.flickr.com/services/rest/?api_key=ea227068d8ee45d50a3c452ef1b4c1b4&format=json&nojsoncallback=1&'
 
-base = 'http://api.flickr.com/services/rest/'
-institutions = '?api_key=a05db3659e0d2f3e28327489d2dd37e2&format=json&nojsoncallback=1&method=flickr.commons.getInstitutions'
+institutions = 'method=flickr.commons.getInstitutions'
+photosets = 'user_id=59811348%40N05&method=flickr.photosets.getList'
+photos = 'photoset_id=72157627575723598&method=flickr.photosets.getPhotos'
 
-FakeWeb.register_uri :get, (base + institutions), :body => (File.open(File.join(File.dirname(__FILE__), 'fakeweb', 'institutions.json')).read)
+fakeweb = File.join(File.dirname(__FILE__), 'fakeweb') 
+FakeWeb.register_uri :get, (base + institutions), :body => (File.open(File.join(fakeweb, 'institutions.json')).read)
+FakeWeb.register_uri :get, (base + photosets), :body => (File.open(File.join(fakeweb, 'photosets.json')).read)
+FakeWeb.register_uri :get, (base + photos), :body => (File.open(File.join(fakeweb, 'photos.json')).read)
