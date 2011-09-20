@@ -12,9 +12,15 @@ class Commons
   end
 
   def institutions
-    @institutions = flickr 'commons.getInstitutions'
+    @institutions = grab_nsids flickr 'commons.getInstitutions'
   end
 
   def random 
+  end
+
+  private
+
+  def grab_nsids response 
+    response[:institutions]
   end
 end

@@ -8,4 +8,5 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'ruby-debug19'
+  gem 'fakeweb'
 end

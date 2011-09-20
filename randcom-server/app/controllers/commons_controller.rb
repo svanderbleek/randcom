@@ -1,2 +1,0 @@
-class CommonsController < ApplicationController
-end
