@@ -1,0 +1,11 @@
+source 'http://rubygems.org'
+
+gem 'rails', '3.0.10'
+gem 'haml'
+gem 'httparty'
+
+group :test, :development do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'ruby-debug19'
+end
