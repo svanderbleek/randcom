@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SBJson.h"
+#import "ASIHTTPRequest.h"
 
 
-@interface FirstViewController : UIViewController {
-
+@interface FirstViewController : UIViewController <ASIHTTPRequestDelegate> {
+	NSURL* commonsURL;
+	NSData* responseData;	
 }
 
 @end
