@@ -4,3 +4,5 @@ svand.*
 db/*.sqlite3
 log/*.log
 tmp/
+*.swp
+.DS_Store

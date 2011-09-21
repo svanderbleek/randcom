@@ -19,6 +19,6 @@ describe Commons do
   end
 
   it "gets a random photo from the commons" do
-    subject.random.should_not eq(nil)
+    subject.random['id'].should match(/[0-9]+/) 
   end
 end

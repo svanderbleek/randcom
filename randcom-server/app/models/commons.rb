@@ -1,3 +1,5 @@
+require 'active_support/core_ext/array/random_access'
+
 class Commons
   include HTTParty
 
@@ -8,38 +10,24 @@ class Commons
                  :nojsoncallback => 1
 
   def flickr method, options={}
-    Parser.call(self.class.get('/services/rest/', :query => options.merge(:method => "flickr.#{method}")).body, :json)
+    response = self.class.get('/services/rest/', :query => options.merge(:method => "flickr.#{method}")).body
+    Parser.call(response, :json)
   end
 
   def institutions
-    @institutions = format_institutions flickr 'commons.getInstitutions'
+    format_institutions flickr 'commons.getInstitutions'
   end
 
   def photosets institution
-    @photosets = format_photosets (flickr 'photosets.getList', { :user_id => institution['nsid'] })
+    format_photosets (flickr 'photosets.getList', { :user_id => institution['nsid'] })
   end
 
   def photos photoset
-    @photos = format_photos (flickr 'photosets.getPhotos', { :photoset_id => photoset['id'] })
+    format_photos (flickr 'photosets.getPhotos', { :photoset_id => photoset['id'] })
   end
-
-  def random_institution
-    @institutions[rand(@institutions.size)] if @institutions
-  end
-
-  def random_photoset
-    @photosets[rand(@photosets.size)] if @photosets
-  end
-
-  def random_photo
-    @photos[rand(@photos.size)] if @photos
-  end  
 
   def random
-    institutions
-    photosets random_institution
-    photos random_photoset
-    random_photo
+    (photos (photosets institutions.sample).sample).sample
   end
 
   private
