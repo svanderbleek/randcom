@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #include "ASIHTTPRequest.h"
+#import "SBJson.h"
 
 @interface randcom_iphoneAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;

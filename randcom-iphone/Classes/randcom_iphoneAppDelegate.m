@@ -18,15 +18,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-	NSURL* url = [NSURL URLWithString:@"http://localhost:3000/commons/random.json"];
-	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+	NSURL* url = [NSURL URLWithString: @"http://localhost:3000/commons/random.json"];
+	ASIHTTPRequest* request = [ASIHTTPRequest requestWithURL: url];
 	[request startSynchronous];
+	
 	NSError *error = [request error];
 	if (!error) {
-		NSString *response = [request responseString];
-		NSLog(response);
+		NSString* response = [request responseString];
+		SBJsonParser* json = [[SBJsonParser alloc] init];		
+		NSDictionary* photo = [json objectWithString: response];
+		NSURL* photo_url = [NSURL URLWithString: [photo valueForKey: @"photo_url"]];
+		UIImage* image = [UIImage imageWithData: [NSData dataWithContentsOfURL: photo_url]];
+		UIImageView* show = [[UIImageView alloc] initWithImage: image];
+		[self.window addSubview: show];
 	}
-	
 	
     [self.window makeKeyAndVisible];
     
