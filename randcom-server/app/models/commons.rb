@@ -26,8 +26,9 @@ class Commons
     format_photos (flickr 'photosets.getPhotos', { :photoset_id => photoset['id'] })
   end
 
-  def random
-    (photos (photosets institutions.sample).sample).sample
+  def random_photo_url
+    photo = (photos (photosets institutions.sample).sample).sample
+    "http://farm#{photo['farm']}.static.flickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}.jpg"
   end
 
   private
@@ -48,7 +49,7 @@ class Commons
   end
 
   def format_photos response
-    desired = %w{id}
+    desired = %w{farm server id secret}
     response['photoset']['photo'].map do |photo|
       photo.select { |key| desired.include? key }
     end
