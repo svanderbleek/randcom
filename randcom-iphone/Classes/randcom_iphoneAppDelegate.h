@@ -1,14 +1,14 @@
 //
-//  randcomAppDelegate.h
-//  randcom
+//  randcom_iphoneAppDelegate.h
+//  randcom-iphone
 //
-//  Created by Sandy D Vanderbleek199 on 9/17/11.
+//  Created by Sandy D Vanderbleek199 on 9/22/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface randcomAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
+@interface randcom_iphoneAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;
     UITabBarController *tabBarController;
 }

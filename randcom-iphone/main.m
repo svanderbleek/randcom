@@ -1,8 +1,8 @@
 //
 //  main.m
-//  randcom
+//  randcom-iphone
 //
-//  Created by Sandy D Vanderbleek199 on 9/17/11.
+//  Created by Sandy D Vanderbleek199 on 9/22/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 

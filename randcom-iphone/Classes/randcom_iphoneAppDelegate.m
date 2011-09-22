@@ -1,15 +1,15 @@
 //
-//  randcomAppDelegate.m
-//  randcom
+//  randcom_iphoneAppDelegate.m
+//  randcom-iphone
 //
-//  Created by Sandy D Vanderbleek199 on 9/17/11.
+//  Created by Sandy D Vanderbleek199 on 9/22/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "randcomAppDelegate.h"
+#import "randcom_iphoneAppDelegate.h"
 
 
-@implementation randcomAppDelegate
+@implementation randcom_iphoneAppDelegate
 
 @synthesize window;
 @synthesize tabBarController;
