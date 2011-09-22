@@ -8,11 +8,9 @@
 
 #import "randcom_iphoneAppDelegate.h"
 
-
 @implementation randcom_iphoneAppDelegate
 
 @synthesize window;
-@synthesize tabBarController;
 
 
 #pragma mark -
@@ -20,12 +18,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-    // Override point for customization after application launch.
-
-	// Set the tab bar controller as the window's root view controller and display.
-    self.window.rootViewController = self.tabBarController;
+	NSURL* url = [NSURL URLWithString:@"http://localhost:3000/commons/random.json"];
+	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+	[request startSynchronous];
+	NSError *error = [request error];
+	if (!error) {
+		NSString *response = [request responseString];
+		NSLog(response);
+	}
+	
+	
     [self.window makeKeyAndVisible];
-
+    
     return YES;
 }
 
@@ -69,22 +73,6 @@
 
 
 #pragma mark -
-#pragma mark UITabBarControllerDelegate methods
-
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-}
-*/
-
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed {
-}
-*/
-
-
-#pragma mark -
 #pragma mark Memory management
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
@@ -95,10 +83,9 @@
 
 
 - (void)dealloc {
-    [tabBarController release];
     [window release];
     [super dealloc];
 }
 
-@end
 
+@end
