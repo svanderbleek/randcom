@@ -14,8 +14,9 @@ class Commons
     Parser.call(response, :json)
   end
 
-  def institutions
-    format_institutions flickr 'commons.getInstitutions'
+  def institutions options={}
+    institutions = format_institutions flickr 'commons.getInstitutions'
+    options[:exclude] ? (exclude_institutions institutions, options[:exclude]) : institutions
   end
 
   def photosets institution
@@ -26,9 +27,9 @@ class Commons
     format_photos (flickr 'photosets.getPhotos', { :photoset_id => photoset['id'] })
   end
 
-  def random_photo_url
-    photo = (photos (photosets institutions.sample).sample).sample
-    "http://farm#{photo['farm']}.static.flickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}.jpg"
+  def random_photo options={} 
+    photo = (photos (photosets (institutions options).sample).sample).sample
+    {'photo_url' => "http://farm#{photo['farm']}.static.flickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}.jpg"}
   end
 
   private
@@ -53,5 +54,10 @@ class Commons
     response['photoset']['photo'].map do |photo|
       photo.select { |key| desired.include? key }
     end
+  end
+
+  def exclude_institutions insitutions, excludes
+    excludes = excludes.split ','
+    institutions.reject {|institution| excludes.include? institution['ns_id']}
   end
 end

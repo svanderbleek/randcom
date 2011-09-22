@@ -10,6 +10,10 @@ describe Commons do
     subject.institutions.first.should eq(institution)
   end
 
+  it "should exclude institutions" do
+    subject.institutions(:exclude => institution['nsid']).first.should_not eq(institution)
+  end
+
   it "gets photosets for an institution" do
     subject.photosets(institution).first.should eq(photoset)
   end
@@ -19,6 +23,6 @@ describe Commons do
   end
 
   it "gets a random photo url from the commons" do
-    subject.random_photo_url.should match(%r{^http://farm[0-9]+.static.flickr.com/[0-9]+/[0-9]+_[0-9a-f]+.jpg$}) 
+    subject.random_photo['photo_url'].should match(%r{^http://farm[0-9]+.static.flickr.com/[0-9]+/[0-9]+_[0-9a-f]+.jpg$}) 
   end
 end
